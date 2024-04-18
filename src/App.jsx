@@ -4,6 +4,8 @@ import * as THREE from 'three';
 import { TeapotGeometry } from "three/examples/jsm/Addons";
 import { RoundedBoxGeometry } from "three/examples/jsm/Addons";
 
+import { GUI } from 'dat.gui'
+
 import SceneInit from "./lib/SceneInit";
 
 function App() {
@@ -11,31 +13,34 @@ function App() {
     const test = new SceneInit('myThreeJsCanvas');
     test.initialize();
     test.animate();
+
+    // add box geometry
+    const boxGeometry = new THREE.BoxGeometry(6, 6, 6)
+    const boxMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff })
+    const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial)
+    test.scene.add(boxMesh)
+
     
-    // PART 1
-    // Adding geometries to a three.js scene
-    const boxGeometry = new THREE.BoxGeometry(10, 10, 10, 1, 1, 10, 16);
-    const boxMaterial = new THREE.MeshNormalMaterial({ wireframe: true});
-    const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
-    boxMesh.position.x = -10
-    // test.scene.add(boxMesh);
-
-    // params: size, segments
-    const teapotGeometry = new TeapotGeometry(5, 10)
-    const teapotMaterial = new THREE.MeshNormalMaterial({wireframe: true});
-    const teapotMesh = new THREE.Mesh(teapotGeometry, teapotMaterial);
-    teapotMesh.position.x = -10;
-    test.scene.add(teapotMesh);
-
     // params: width, height, depth, segment, radius
-    const roundedboxGeometry = new RoundedBoxGeometry(10, 10, 10, 10, 10);
+    const roundedboxGeometry = new RoundedBoxGeometry(6, 6, 6, 6, 6);
     // (10, 10, 10, 10, 10) alters the rounded box and creates a perfect circle...
 
-    const roundedboxMaterial = new THREE.MeshNormalMaterial({wireframe: true});
+    const roundedboxMaterial = new THREE.MeshPhongMaterial({ 
+      color: 0xffffff,
+      wireframe: true,
+    })
     const roundedboxMesh = new THREE.Mesh(roundedboxGeometry, roundedboxMaterial);
-    roundedboxMesh.position.x = 10;
+    // roundedboxMesh.position.x = 10;
+    roundedboxMesh.position.y = 8
     test.scene.add(roundedboxMesh);
 
+    const gui = new GUI()
+
+    // add space texture
+    const spaceTexture = new THREE.TextureLoader().load("./assets/space.jpeg")
+    test.scene.background = spaceTexture
+
+    const uvTexture = new THREE.TextureLoader().load('./assets/uv.png')
 
     // geometry
     // material
