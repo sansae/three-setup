@@ -18,6 +18,10 @@ function App() {
 
     // add textures...
     const spaceTexture = new THREE.TextureLoader().load("./assets/space.jpeg")
+    spaceTexture.wrapS = THREE.RepeatWrapping
+    spaceTexture.wrapT = THREE.RepeatWrapping
+    spaceTexture.repeat.set(2,2)
+    
     const uvTexture = new THREE.TextureLoader().load('./assets/uv.png')
     const earthTexture = new THREE.TextureLoader().load('./assets/earth.jpeg')
     const crateTexture = new THREE.TextureLoader().load('./assets/crate.png')
