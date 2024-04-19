@@ -25,6 +25,8 @@ function App() {
     
     // material that goes on geometries
     const boxMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff })
+    // const boxMaterial = new THREE.MeshStandardMaterial({ map: uvTexture })
+    
     const boxMaterial2 = new THREE.MeshPhongMaterial({ color: 0xffffff })
     const boxMaterial3 = new THREE.MeshPhongMaterial({ color: 0xffffff })
     const roundedBoxMaterial = new THREE.MeshPhongMaterial({ 
@@ -57,11 +59,17 @@ function App() {
 
     const gui = new GUI()
 
-    // add space texture
+    // add textures
     const spaceTexture = new THREE.TextureLoader().load("./assets/space.jpeg")
     test.scene.background = spaceTexture
 
     const uvTexture = new THREE.TextureLoader().load('./assets/uv.png')
+
+    const bg = new THREE.BoxGeometry(6, 6, 6, 6, 6, 6)
+    const bmat = new THREE.MeshStandardMaterial({ map: uvTexture })
+    const bmesh = new THREE.Mesh(bg, bmat)
+    bmesh.position.set(0, -8)
+    test.scene.add(bmesh)
 
     // geometry
     // material
