@@ -13,26 +13,47 @@ function App() {
     const test = new SceneInit('myThreeJsCanvas');
     test.initialize();
     test.animate();
-
-    // add box geometry
-    const boxGeometry = new THREE.BoxGeometry(6, 6, 6)
-    const boxMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff })
-    const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial)
-    test.scene.add(boxMesh)
-
     
-    // params: width, height, depth, segment, radius
-    const roundedboxGeometry = new RoundedBoxGeometry(6, 6, 6, 6, 6);
-    // (10, 10, 10, 10, 10) alters the rounded box and creates a perfect circle...
-
-    const roundedboxMaterial = new THREE.MeshPhongMaterial({ 
+    // geometries
+    const boxGeometry = new THREE.BoxGeometry(6, 6, 6)
+    const boxGeometry2 = new THREE.BoxGeometry(6, 6, 6)
+    const boxGeometry3 = new THREE.BoxGeometry(6, 6, 6)
+    // when each argument for RoundedBoxGeometry is the same number, it alters the rounded box and creates a perfect circle...
+    const roundedBoxGeometry = new RoundedBoxGeometry(6, 6, 6, 6, 6);
+    const roundedBoxGeometry2 = new RoundedBoxGeometry(6, 6, 6, 6, 6, 6)
+    const roundedBoxGeometry3 = new RoundedBoxGeometry(6, 6, 6, 6, 6, 6)
+    
+    // material that goes on geometries
+    const boxMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff })
+    const boxMaterial2 = new THREE.MeshPhongMaterial({ color: 0xffffff })
+    const boxMaterial3 = new THREE.MeshPhongMaterial({ color: 0xffffff })
+    const roundedBoxMaterial = new THREE.MeshPhongMaterial({ 
       color: 0xffffff,
       wireframe: true,
     })
-    const roundedboxMesh = new THREE.Mesh(roundedboxGeometry, roundedboxMaterial);
-    // roundedboxMesh.position.x = 10;
-    roundedboxMesh.position.y = 8
-    test.scene.add(roundedboxMesh);
+    const roundedBoxMaterial2 = new THREE.MeshPhongMaterial({ color: 0xffffff })
+    const roundedBoxMaterial3 = new THREE.MeshPhongMaterial({ color: 0xffffff })
+    
+    // the mesh that brings geomtries and materials together
+    const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial)
+    const boxMesh2 = new THREE.Mesh(boxGeometry2, boxMaterial2)
+    const boxMesh3 = new THREE.Mesh(boxGeometry3, boxMaterial3)
+    const roundedBoxMesh = new THREE.Mesh(roundedBoxGeometry, roundedBoxMaterial);
+    const roundedBoxMesh2 = new THREE.Mesh(roundedBoxGeometry2, roundedBoxMaterial2)
+    const roundedBoxMesh3 = new THREE.Mesh(roundedBoxGeometry3, roundedBoxMaterial3)
+
+    // positioning of geometries
+    boxMesh2.position.x = 8
+    boxMesh3.position.x = -8
+    // roundedBoxMesh.position.y = 8
+    roundedBoxMesh.position.set(null, 8)
+    roundedBoxMesh2.position.set(8, 8)
+    roundedBoxMesh3.position.set(-8, 8)
+
+    // adding the geometries to the scene
+    test.scene.add(boxMesh, boxMesh2, boxMesh3, roundedBoxMesh, roundedBoxMesh2, roundedBoxMesh3)
+
+
 
     const gui = new GUI()
 
