@@ -85,6 +85,9 @@ function App() {
     gui.add(boxMesh.scale, 'x', 0, 2).name('Scale X Axis')
     gui.add(boxMesh.scale, 'y', 0, 2).name('Scale Y Axis')
     gui.add(boxMesh.scale, 'z', 0, 2).name('Scale Z Axis')
+
+    // using gui to update material's color and wireframe
+    gui.add(boxMesh.material, 'wireframe')
   }, []);
 
   return (
