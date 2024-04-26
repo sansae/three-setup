@@ -86,8 +86,17 @@ function App() {
     gui.add(boxMesh.scale, 'y', 0, 2).name('Scale Y Axis')
     gui.add(boxMesh.scale, 'z', 0, 2).name('Scale Z Axis')
 
-    // using gui to update material's color and wireframe
+    // add wireframe option to gui
     gui.add(boxMesh.material, 'wireframe')
+
+    // add hex color picker to gui
+    const materialParams = {
+      boxMeshColor: boxMesh.material.color.getHex()
+    }
+
+    gui
+      .addColor(materialParams, 'boxMeshColor')
+      .onChange((value) => boxMesh.material.color.set(value))
   }, []);
 
   return (
