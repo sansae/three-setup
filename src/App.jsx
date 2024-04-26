@@ -14,8 +14,6 @@ function App() {
     test.initialize();
     test.animate();
 
-    const gui = new GUI()
-
     // add textures...
     const spaceTexture = new THREE.TextureLoader().load("./assets/space.jpeg")
     spaceTexture.wrapS = THREE.RepeatWrapping
@@ -77,6 +75,16 @@ function App() {
     const bmesh = new THREE.Mesh(bg, bmat)
     bmesh.position.set(0, -8)
     test.scene.add(bmesh)
+
+
+    // adding the gui for controlling geometries...
+    const gui = new GUI()
+    gui.add(boxMesh.rotation, 'x', 0, 10).name('Rotate X Axis')
+    gui.add(boxMesh.rotation, 'y', 0, 10).name('Rotate Y Axis')
+    gui.add(boxMesh.rotation, 'z', 0, 10).name('Rotate Z Axis')
+    gui.add(boxMesh.scale, 'x', 0, 2).name('Scale X Axis')
+    gui.add(boxMesh.scale, 'y', 0, 2).name('Scale Y Axis')
+    gui.add(boxMesh.scale, 'z', 0, 2).name('Scale Z Axis')
   }, []);
 
   return (
