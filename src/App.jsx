@@ -79,12 +79,23 @@ function App() {
 
     // adding the gui for controlling geometries...
     const gui = new GUI()
-    gui.add(boxMesh.rotation, 'x', 0, 10).name('Rotate X Axis')
-    gui.add(boxMesh.rotation, 'y', 0, 10).name('Rotate Y Axis')
-    gui.add(boxMesh.rotation, 'z', 0, 10).name('Rotate Z Axis')
-    gui.add(boxMesh.scale, 'x', 0, 2).name('Scale X Axis')
-    gui.add(boxMesh.scale, 'y', 0, 2).name('Scale Y Axis')
-    gui.add(boxMesh.scale, 'z', 0, 2).name('Scale Z Axis')
+
+    // add folders to gui to organize options
+    const geometryFolder = gui.addFolder('Mesh Geometry')
+    geometryFolder.open()
+
+    const rotationFolder = geometryFolder.addFolder('Rotation')
+    const scaleFolder = geometryFolder.addFolder('Scale')
+
+    rotationFolder.add(boxMesh.rotation, 'x', 0, 10).name('Rotate X Axis')
+    rotationFolder.add(boxMesh.rotation, 'y', 0, 10).name('Rotate Y Axis')
+    rotationFolder.add(boxMesh.rotation, 'z', 0, 10).name('Rotate Z Axis')
+    scaleFolder.add(boxMesh.scale, 'x', 0, 2).name('Scale X Axis')
+    scaleFolder.add(boxMesh.scale, 'y', 0, 2).name('Scale Y Axis')
+    scaleFolder.add(boxMesh.scale, 'z', 0, 2).name('Scale Z Axis')
+
+    // CHALLENGE:
+    // try to add the wireframe and color picker in a subfolder
 
     // add wireframe option to gui
     gui.add(boxMesh.material, 'wireframe')
