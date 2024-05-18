@@ -79,6 +79,11 @@ function App() {
 
     // adding the gui for controlling geometries...
     const gui = new GUI()
+    // resize the gui to fit needs
+    gui.width = 350
+    // could also just do:
+    // gui = new GUI({ width: 350 })
+    
 
     // add folders to gui to organize options
     const geometryFolder = gui.addFolder('Mesh Geometry')
@@ -96,18 +101,29 @@ function App() {
 
     // CHALLENGE:
     // try to add the wireframe and color picker in a subfolder
+    geometryFolder.add(boxMesh.material, 'wireframe').name('boxMesh wireframe')
+    geometryFolder.add(boxMesh2.material, 'wireframe').name('boxMesh2 wireframe')
 
-    // add wireframe option to gui
-    gui.add(boxMesh.material, 'wireframe')
-
-    // add hex color picker to gui
+    
+    /* add hex color picker to gui */
+    // step 1:
     const materialParams = {
-      boxMeshColor: boxMesh.material.color.getHex()
+      boxMeshColor: boxMesh.material.color.getHex(),
+      boxMesh2Color: boxMesh2.material.color.getHex(),
     }
-
-    gui
+    // step2:
+    geometryFolder
       .addColor(materialParams, 'boxMeshColor')
       .onChange((value) => boxMesh.material.color.set(value))
+    geometryFolder
+      .addColor(materialParams, 'boxMesh2Color')
+      .onChange((value) => boxMesh2.material.color.set(value))
+      
+
+
+    // set up ambient light
+    // const al = new THREE.AmbientLight(0xffffff, 0.5)
+    // test.scene.add(al)
   }, []);
 
   return (
