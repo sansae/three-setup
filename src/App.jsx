@@ -143,6 +143,21 @@ function App() {
       .onChange((value) => al.color.set(value))
     alFolder.open()
 
+
+
+    // add directional light
+    const dl = new THREE.DirectionalLight(0xffffff, .5)
+    test.scene.add(dl)
+
+    const dlFolder = gui.addFolder('directional light')
+    dlFolder.add(dl, 'visible')
+    dlFolder.add(dl, 'intensity', 0, 1, 0.25)
+    const dlColorSettings = { color: dl.color.getHex() }
+    dlFolder
+      .addColor(dlColorSettings, 'color')
+      .onChange((value) => dl.color.set(value))
+    dlFolder.open()
+
   }, []);
 
   return (
