@@ -121,9 +121,20 @@ function App() {
       
 
 
-    // set up ambient light
-    // const al = new THREE.AmbientLight(0xffffff, 0.5)
-    // test.scene.add(al)
+    // add ambient light
+    const al = new THREE.AmbientLight(0xffffff, .5)
+    test.scene.add(al)
+
+    // add ambient light control to gui
+    const alFolder = gui.addFolder('ambient light')
+    const alSettings = { color: al.color.getHex() }
+    alFolder.add(al, 'visible')
+    alFolder.add(al, 'intensity', 0, 1, 0.25)
+    alFolder
+      .addColor(alSettings, 'color')
+      .onChange((value) => al.color.set(value))
+    alFolder.open()
+
   }, []);
 
   return (
