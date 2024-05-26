@@ -25,6 +25,17 @@ function App() {
     const crateTexture = new THREE.TextureLoader().load('./assets/crate.png')
     test.scene.background = spaceTexture
 
+
+    // CHALLENGE:
+    // try to create a large rectangular platform that sits under all the shapes (so that we can test the ambient light)
+    const platformGeometry = new THREE.BoxGeometry(30, 1, 30)
+    const platformMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff })
+    const platformMesh = new THREE.Mesh(platformGeometry, platformMaterial)
+
+    platformMesh.position.set(null, -15)
+
+    test.scene.add(platformMesh)
+
     
     // geometries
     const boxGeometry = new THREE.BoxGeometry(6, 6, 6)
@@ -68,14 +79,11 @@ function App() {
     // adding the geometries to the scene
     test.scene.add(boxMesh, boxMesh2, boxMesh3, roundedBoxMesh, roundedBoxMesh2, roundedBoxMesh3)
 
-
-
     const bg = new THREE.BoxGeometry(6, 6, 6, 6, 6, 6)
     const bmat = new THREE.MeshStandardMaterial({ map: uvTexture })
     const bmesh = new THREE.Mesh(bg, bmat)
     bmesh.position.set(0, -8)
     test.scene.add(bmesh)
-
 
     // adding the gui for controlling geometries...
     const gui = new GUI()
