@@ -150,29 +150,28 @@ function App() {
     // CHALLENGE: set default zoom (i.e. change how closely you see the scene by default by using "scale" on the scene; scale is set at 1, 1, 1 by default, but that's kinda too close up)
     test.scene.scale.set(.75, .75, .75)
 
+    test.scene.rotation.set(0.3, 0.3, 0)
 
 
-    // CHALLENGE: add directional light and shadows
-    // see https://threejs.org/docs/#api/en/lights/shadows/DirectionalLightShadow
-    
-    // adds gui control for directional light
-    // const dlFolder = gui.addFolder('directional light')
-    // dlFolder.add(dl, 'visible')
-    // dlFolder.add(dl, 'intensity', 0, 1, 0.25)
-    // const dlColorSettings = { color: dl.color.getHex() }
-    // dlFolder
-    //   .addColor(dlColorSettings, 'color')
-    //   .onChange((value) => dl.color.set(value))
-    // dlFolder.open()
 
-    const renderer = new THREE.WebGLRenderer();
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    // CHALLENGE: add directional light
+    // const renderer = new THREE.WebGLRenderer();
+    // renderer.shadowMap.enabled = true;
+    // renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-    const light = new THREE.DirectionalLight( 0xffffff, 1 );
+    const light = new THREE.DirectionalLight( 0xff0000, 1 );
     light.position.set( 0, 1, 0 ); //default; light shining from top
     light.castShadow = true; // default false
     test.scene.add( light );
+
+    // add gui control for directional light
+    const lightFolder = gui.addFolder('directional light')
+    lightFolder.add(light, 'visible')
+    lightFolder.add(light, 'intensity', 0, 1, .25)
+    const lightColorSettings = { color: light.color.getHex() }
+    lightFolder
+      .addColor(lightColorSettings, 'color')
+      .onChange((value) => light.color.set(value))
 
     
 
